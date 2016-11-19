@@ -1,6 +1,5 @@
-
-
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -10,7 +9,7 @@
 
 		<link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="{{ STATIC_URL }}css/screen.css" rel="stylesheet" media="screen">
-                <link href="{{ STATIC_URL }}css/mysite.css" rel="stylesheet" media="screen">
+        <link href="{{ STATIC_URL }}css/mysite.css" rel="stylesheet" media="screen">
 	    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	    <!--[if lt IE 9]>
 	      <script src="{{ STATIC_URL }}js/html5shiv.min.js"></script>
@@ -30,17 +29,19 @@
 		    </button>
 		    <a class="navbar-brand" href="/">Strona główna</a>
 		  </div>
-		
+
 		  <!-- Collect the nav links, forms, and other content for toggling -->
 		  <div class="collapse navbar-collapse navbar-ex1-collapse">
 		    <ul class="nav navbar-nav">
 
 			    {% if not user.is_authenticated %}
-                            <li><a href="{% url 'django.contrib.auth.views.login' %}">Logowanie</a></li>
+                        <li><a href="{% url 'login' %}">Logowanie</a></li>
                             {% else %}
-                            <li><a href="{% url 'django.contrib.auth.views.logout' %}">Wyloguj</a></li>
-			   
+                        <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+                            {% endif %}
 
+
+                            {% if user.is_authenticated %}
 			    <li class="galleries dropdown">
 					<a data-target="#" href="" class="dropdown-toggle" data-toggle="dropdown">
 			            Nasze zdjęcia z wesela<b class="caret"></b>
@@ -49,7 +50,7 @@
 						<li class="sub-page"><a href="{% url 'photologue:gallery-list' %}">Wyświetl galerie</a></li>
 					</ul>
 				</li>
- {% endif %}	
+                            {% endif %}
 		    </ul>
 		  </div><!-- /.navbar-collapse -->
 		</nav>
@@ -61,3 +62,4 @@
 		<script src="{{ STATIC_URL }}js/project.js"></script>
     </body>
 </html>
+
