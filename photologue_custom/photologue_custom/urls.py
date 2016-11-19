@@ -1,20 +1,37 @@
-from django.conf.urls import include, url
-from django.contrib import admin
-from django.conf.urls import *
-from photologue.views import GalleryListView
-from photologue.views import GalleryDetailView
-from photologue.views import GalleryDateView
-from photologue.views import PhotoListView
-from photologue.views import PhotoDetailView
-from photologue.views import PhotoDateView
-from django.contrib.auth import views as auth_views
+from django.conf.urls import url
+
+from photologue_custom.views import CustomGalleryListView, CustomGalleryDetailView, CustomPhotoDetailView, \
+     CustomPhotoListView, CustomGalleryArchiveIndexView, CustomGalleryYearArchiveView, CustomGalleryDateDetailView
+
 
 urlpatterns = [
-    # Examples:
-    # url(r'^$', 'photologue_custom.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+url(r'^gallerylist/$',
+        CustomGalleryListView.as_view(),
+        name='gallery-list'),
 
-    url(r'^admin/', include(admin.site.urls)),
+
+url(r'^gallery/(?P<slug>[\-\d\w]+)/$',
+        CustomGalleryDetailView.as_view(),
+        name='pl-gallery'),
+
+url(r'^gallery/(?P<year>\d{4})/(?P<month>[0-9]{2})/(?P<day>\w{1,2})/(?P<slug>[\-\d\w]+)/$',
+        CustomGalleryDateDetailView.as_view(month_format='%m'),
+        name='gallery-detail'),
+
+url(r'^gallery/$',
+        CustomGalleryArchiveIndexView.as_view(),
+        name='pl-gallery-archive'),
+
+url(r'^photo/(?P<slug>[\-\d\w]+)/$',
+        CustomPhotoDetailView.as_view(),
+        name='pl-photo'),
+
+url(r'^photolist/$',
+        CustomPhotoListView.as_view(),
+        name='photo-list'),
+
+
+url(r'^gallery/(?P<year>\d{4})/$',
+        CustomGalleryYearArchiveView.as_view(),
+        name='pl-gallery-archive-year'),
 ]
-
-url(r'^photologue/', auth_views.login),
