@@ -6,7 +6,9 @@
 <p>Nazwa użytkownika lub hasło jest nieprawidłowe. Spróbuj jeszcze raz</p>
 {% endif %}
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+
+
+<form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 <table>
 <tr>
@@ -22,5 +24,7 @@
 <input type="submit" value="login" />
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+
 
 {% endblock %}
