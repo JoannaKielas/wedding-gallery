@@ -11,12 +11,11 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 import os
 import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -26,9 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'b4cvr2@a#tnu_pm@tek52_&l++z-nw*8gg91#i85dmx5$b6_jr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['celinaitomek.pythonanywhere.com']
 
 SITE_ID = 1
 
@@ -41,12 +41,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'photologue',
     'photologue_custom',
+    'photologue',
     'sortedm2m',
     'django.contrib.sites',
     'django.contrib.sitemaps',
-   
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 )
 
 ROOT_URLCONF = 'mysite.urls'
@@ -65,7 +65,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'mysite/templates'), ],
+        'DIRS': [os.path.join(BASE_DIR, 'mysite/templates',  ), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +91,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': '/home/celinaitomek/wedding-gallery/db.sqlite3',
     }
 }
 
@@ -124,8 +125,9 @@ STATICFILES_DIRS = (
 
 TEMPLATE_DIRS = (
     'mysite/templates',
-)
+    )
+
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login'
+LOGIN_URL = '/login/'
 
